@@ -1,0 +1,16 @@
+body{
+    background-image: url("../images/background.png");
+    text-align: center;
+}
+
+button{
+    display:block;
+    width:50%;
+    height:20%;
+    margin: 0 auto;
+    border:none;
+    cursor: pointer;
+    background:transparent;
+    font-size: 42px;;
+  }
+  
