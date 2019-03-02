@@ -15,34 +15,35 @@ $(document).on('click', '#start', function (e) {
 });
 
 var questions = [{
-  question: "Who is the all-time leader in career home runs?",
+  question: "Who is the MLB all-time leader in career home runs with 762?",
   answers: ["Ken Griffey Jr.", "Barry Bonds", "Hank Aaron", "Babe Ruth"],
-  correctAnswer: "Barry Bonds. Barry Bonds is the all-time leader in career home runs, with 762. He even once hit 73 home runs in season (2001), which remains untouched to this day.",
-  image: "assets/images/bonds.gif"
+  correctAnswer: "Barry Bonds",
+  image: "assets/images/bonds.gif",
 },
 {
-  question: "Who is the recipient of the highest AAV (annual average value) contract?",
+  question: "Who is the recipient of the highest AAV (annual average value) contract, which tops out at $33.7 million per year for 8 years?",
   answers: ["Bryce Harper", "Giancarlo Stanton", "Nolan Arenado", "Manny Machado"],
-  correctAnswer: "Nolan Arenado. Due to his wizardry manning the hot corner for the Rockies, along with his monster bat, the Colorado Rockies rewarded Arenado with a 8 year/$260 million contract, which pays him $33.8 million per year in years 5-8 of the deal, effectively making the deal the highest-paying AAV deal in history.",
-  image: "assets/images/arenado.gif"
+  correctAnswer: "Nolan Arenado",
+  image: "assets/images/arenado.gif",
 },
 {
   question: "Which team has won the most championships since 2000?",
   answers: ["San Francisco Giants", "New York Yankees", "Chicago Cubs", "Boston Red Sox"],
-  correctAnswer: "Boston Red Sox. Since 2000, the Red Sox have won four championships.",
-  image: "assets/images/redsox.gif"
+  correctAnswer: "Boston Red Sox",
+  image: "assets/images/redsox.gif",
 },
 {
-  question: "Which closer has the most saves in MLB history?",
+  question: "Also known as the Sandman, which closer has the most saves in MLB history?",
   answers: ["Trevor Hoffman", "Brian Wilson", "Craig Kimbrel", "Mariano Rivera"],
   correctAnswer: "Mariano Rivera",
-  image: "assets/images/mo.gif"
+  image: "assets/images/mo.gif",
+
 },
 {
   question: "Who is the all-time leader in stolen bases, also known as The Man of Steal?",
   answers: ["Billy Hamilton", "Dee Gordon", "Ricky Henderson", "Ichiro Suzuki"],
-  correctAnswer: "Ricky Henderson",
-  image: "assets/images/ricky.gif"
+  correctAnswer: "Ricky Henderson", 
+  image: "assets/images/ricky.gif",
 }
 
 ];
@@ -79,25 +80,15 @@ var game = {
     clearInterval(timer);
     $('#counter-number').html(game.counter);
 
-    panel.html('<h2>Out of Time!</h2>');
+    panel.html('<h2>Time is up!</h2>');
     panel.append('<h3>The Correct Answer is: ' + questions[this.currentQuestion].correctAnswer);
-    panel.append('<img src="' + questions[this.currentQuestion].image + '" />');
+    panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
 
     if (game.currentQuestion === questions.length - 1) {
       setTimeout(game.results, 5 * 1000);
     } else {
       setTimeout(game.nextQuestion, 5 * 1000);
     }
-  },
-  results: function () {
-    clearInterval(timer);
-
-    panel.html('<h2>Heres how you did on this quiz!</h2>');
-    $('#counter-number').html(game.counter);
-    panel.append('<h3>Correct Answers: ' + game.correct + '</h3>');
-    panel.append('<h3>Incorrect Answers: ' + game.incorrect + '</h3>');
-    panel.append('<h3>Unanswered: ' + (questions.length - (game.incorrect + game.correct)) + '</h3>');
-    panel.append('<br><button id="start-over">Start Over?</button>');
   },
   clicked: function (e) {
     clearInterval(timer);
@@ -112,7 +103,7 @@ var game = {
     game.incorrect++;
     clearInterval(timer);
     panel.html('<h2>Incorrect!</h2>');
-    panel.append('<h3>The Correct Answer was: ' + questions[game.currentQuestion].correctAnswer + '</h3>');
+    panel.append('<h3>The Correct Answer is: ' + questions[game.currentQuestion].correctAnswer + '</h3>');
     panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
 
     if (game.currentQuestion === questions.length - 1) {
@@ -132,6 +123,15 @@ var game = {
     } else {
       setTimeout(game.nextQuestion, 5 * 1000);
     }
+  },
+  results: function () {
+    clearInterval(timer);
+    panel.html('<h2>How you did on this quiz:</h2>');
+    $('#counter-number').html(game.counter);
+    panel.append('<h3>Correct Answers: ' + game.correct + '</h3>');
+    panel.append('<h3>Incorrect Answers: ' + game.incorrect + '</h3>');
+    panel.append('<h3>Unanswered: ' + (questions.length - (game.incorrect + game.correct)) + '</h3>');
+    panel.append('<br><button id="start-over">Start Over?</button>');
   },
   reset: function () {
     this.currentQuestion = 0;
